@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+	<!-- The following links are for d3.js
+		the first link is for version 2 (linechart is done by using this)
+		the second link if for version 4
+	-->
+	<script src="http://mbostock.github.com/d3/d3.v2.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+
+	
+	<!--The below link is for style and bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!--The below links is for jqeury for poping up-->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+
+	
+	
+</head>
+<body>
+	
+	
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+	<form name="_form" class="form-horizontal" >
+		<div class="modal-header">
+			<h3>Widget Settings</h3>
+		</div>
+		<div class="modal-body">
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<div class="form-group" ng-class="{error: _form.name.$error &amp;&amp; _form.submitted}">
+							<label class="control-label col-lg-4 col-md-4">Name</label>
+							<div class="col-lg-8 col-md-8">
+								<input id="chartname" name="name" type="text" ng-model="form.name" class="form-control ng-pristine ng-valid">
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">Type</label>
+							<div class="col-lg-8 col-md-8">
+								<select id="selectcharttype" name="type" class="form-control ng-pristine ng-valid" ng-options="value for value in widgetTypes">
+									<option value="none">none</option>
+									<option value="bar">Bar</option>
+									<option value="pie">Pie</option>
+									<option value="line">Line</option> 
+
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<div class="form-group" ng-class="{error: _form.sizeX.$error &amp;&amp; _form.submitted}">
+							<label class="control-label col-lg-4 col-md-4">Width</label>
+							<div class="col-lg-8 col-md-8">
+								<input name="sizeX" ng-model="form.sizeX" class="form-control ng-pristine ng-valid">
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">Height</label>
+							<div class="col-lg-8 col-md-8">
+								<input name="sizeY" ng-model="form.sizeY" class="form-control ng-pristine ng-valid">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<div class="form-group" ng-class="{error: _form.sizeX.$error &amp;&amp; _form.submitted}">
+							<label class="control-label col-lg-4 col-md-4">Column</label>
+							<div class="col-lg-8 col-md-8">
+								<input name="col" ng-model="form.col" class="form-control ng-pristine ng-valid">
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">Row</label>
+							<div class="col-lg-8 col-md-8">
+								<input name="row" ng-model="form.row" class="form-control ng-pristine ng-valid">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		
+		
+		
+		
+		<div class="modal-footer">
+			<a class="btn btn-danger pull-left" style="margin-top: 10px;" ><i class="glyphicon glyphicon-trash"></i> Delete</a>
+			<a class="btn btn-default" tabindex="-1"><i class="glyphicon glyphicon-remove"></i> Cancel</a>
+			<button id="modalsave" type="button" onclick="selectchart()" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-ok"></i> Save</button>
+		</div>
+
+	</form>
+		
+
+
+  </div>
+
+</div>
+
+
+	
+
+
+	
+	<button id="widget" class="btn btn-primary center-block" onclick="widgetopen()">widget</button>
+
+	<div id="savedchart" class="text-center">
+		Click below to save the generated charts.
+		<input id="save" class="btn btn-primary center-block" type="button" value="save" onclick="savethecharts()" />
+		<br>Your saved charts are:
+	</div>
+	<svg id="svg1" width="300" height="200"> </svg>
+	<svg id="svg2" width="300" height="200"> </svg>
+	<svg id="svg3" width="300" height="200"> </svg>
+	<div id="tab"></div>
+	<script src="./script.js"></script>
+
+</body>
+</html>
