@@ -75,7 +75,7 @@
 						<div class="form-group" ng-class="{error: _form.sizeX.$error &amp;&amp; _form.submitted}">
 							<label class="control-label col-lg-4 col-md-4">Width</label>
 							<div class="col-lg-8 col-md-8">
-								<input name="sizeX" ng-model="form.sizeX" class="form-control ng-pristine ng-valid">
+								<input name="sizeX" id="width" ng-model="form.sizeX" class="form-control ng-pristine ng-valid">
 							</div>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 						<div class="form-group">
 							<label class="control-label col-lg-4 col-md-4">Height</label>
 							<div class="col-lg-8 col-md-8">
-								<input name="sizeY" ng-model="form.sizeY" class="form-control ng-pristine ng-valid">
+								<input name="sizeY" id="height" ng-model="form.sizeY" class="form-control ng-pristine ng-valid">
 							</div>
 						</div>
 					</div>
@@ -131,9 +131,9 @@
 
 
 	
-	<button id="widget" class="btn btn-primary center-block" onclick="widgetopen()">widget</button>
+	<button id="widget" class="btn btn-primary center-block" onclick="widgetopen()">add widget</button>
 
-	<div id="savedchart" class="text-center">
+	<div id="savechart" class="text-center">
 		Click below to save the generated charts.
 		<input id="save" class="btn btn-primary center-block" type="button" value="save" onclick="savethecharts()" />
 		<br>Your saved charts are:
